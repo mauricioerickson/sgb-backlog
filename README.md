@@ -1,61 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema Gerenciador de Backlog (SGB)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição Curta
+O SGB (Sistema Gerenciador de Backlog) é uma aplicação web desenvolvida para auxiliar no gerenciamento eficiente de backlogs de projetos, permitindo o cadastro, acompanhamento e organização de objetivos estratégicos, funcionalidades, tarefas e seus respectivos status, responsáveis e prazos.
 
-## About Laravel
+**Status do Projeto:** Em Desenvolvimento (20 de Maio de 2025)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Índice
+1.  [Visão Geral Detalhada](#visão-geral-detalhada)
+2.  [Funcionalidades Principais](#funcionalidades-principais)
+3.  [Stack Tecnológico](#stack-tecnológico)
+4.  [Pré-requisitos](#pré-requisitos)
+5.  [Instalação e Configuração (Ambiente de Desenvolvimento)](#instalação-e-configuração-ambiente-de-desenvolvimento)
+6.  [Executando a Aplicação](#executando-a-aplicação)
+7.  [Importação de Dados Iniciais (CSV)](#importação-de-dados-iniciais-csv)
+8.  [Estrutura do Projeto (Principais Diretórios Laravel)](#estrutura-do-projeto-principais-diretórios-laravel)
+9.  [Deploy (Passos Gerais para Produção)](#deploy-passos-gerais-para-produção)
+10. [Roadmap e Funcionalidades Futuras (Sugestões)](#roadmap-e-funcionalidades-futuras-sugestões)
+11. [Como Contribuir (Opcional)](#como-contribuir-opcional)
+12. [Autores](#autores)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Visão Geral Detalhada
+Este projeto visa substituir o gerenciamento de backlog baseado em planilhas por uma solução web centralizada e colaborativa. O SGB permite uma visão hierárquica do trabalho, desde objetivos trimestrais/semestrais até as tarefas individuais necessárias para alcançá-los. Ele também facilita a categorização de itens por sistemas, módulos e sprints, além de permitir o acompanhamento do progresso através de status e responsáveis.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+O sistema foi inicialmente concebido para importar dados de planilhas CSV (`Backlog_GIMB_Organizado.xlsx - Visão Geral.csv` e `Backlog_GIMB_Organizado.xlsx - Tarefas.csv`).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Funcionalidades Principais
+* **Dashboard:** Tela inicial com visão geral e links rápidos.
+* **Gerenciamento de Períodos (Quarters):** Criação e organização de trimestres/semestres para planejamento.
+* **Gerenciamento de Objetivos Principais:** Definição de metas estratégicas vinculadas a períodos.
+* **Gerenciamento de Funcionalidades (Features):** Detalhamento de entregáveis que contribuem para os objetivos.
+* **Gerenciamento de Tarefas:** Criação, atribuição e acompanhamento de itens de trabalho detalhados.
+    * Campos como título, descrição, tipo, prioridade, status, estimativa, datas, responsável, solicitante.
+    * Associação a funcionalidades, sistemas, módulos e sprints.
+* **Gerenciamento de Comentários em Tarefas:** Espaço para discussão e atualizações sobre as tarefas.
+* **Gerenciamento de Categorias:**
+    * **Sistemas:** Cadastro dos sistemas envolvidos no projeto (ex: APP, WEB, API).
+    * **Módulos:** Cadastro de módulos, podendo ser associados a sistemas.
+    * **Sprints:** Organização do trabalho em ciclos curtos de desenvolvimento.
+* **Busca e Filtragem:** Capacidade de buscar e filtrar itens de backlog.
+* **(Inicial) Gerenciamento de Usuários:** (Com estrutura para login e atribuição de responsáveis/solicitantes).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Stack Tecnológico
+* **Linguagem Backend:** PHP 8.x
+* **Framework Backend:** Laravel 10.x
+* **Banco de Dados:** MySQL 8.x
+* **Frontend:** HTML5, CSS3, JavaScript (utilizando Blade Templates do Laravel)
+* **Servidor Web (Desenvolvimento):** Servidor embutido do Laravel (`php artisan serve`)
+* **Servidor Web (Produção):** Nginx ou Apache
+* **Gerenciador de Dependências PHP:** Composer
+* **Controle de Versão:** Git
 
-## Laravel Sponsors
+## Pré-requisitos
+Para rodar este projeto em um ambiente de desenvolvimento, você precisará ter instalado:
+* PHP (versão compatível com Laravel 10.x, ex: >= 8.1)
+* Composer
+* Node.js e NPM (ou Yarn) - para dependências frontend e compilação de assets, se utilizado Vite/Mix.
+* MySQL (ou outro SGBD compatível com Laravel, mas o projeto está configurado para MySQL)
+* Git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Instalação e Configuração (Ambiente de Desenvolvimento)
 
-### Premium Partners
+1.  **Clonar o Repositório:**
+    ```bash
+    git clone [URL_DO_SEU_REPOSITORIO_GIT] sgb-backlog
+    cd sgb-backlog
+    ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2.  **Instalar Dependências PHP:**
+    ```bash
+    composer install
+    ```
 
-## Contributing
+3.  **Instalar Dependências Frontend (se aplicável):**
+    ```bash
+    npm install
+    # ou yarn install
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4.  **Configurar Arquivo de Ambiente:**
+    * Copie o arquivo de exemplo `.env.example` para `.env`:
+        ```bash
+        cp .env.example .env
+        ```
+    * Abra o arquivo `.env` e configure as variáveis de ambiente, especialmente as de conexão com o banco de dados (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`):
+        ```env
+        APP_NAME="SGB Backlog"
+        APP_ENV=local
+        APP_KEY=
+        APP_DEBUG=true
+        APP_URL=http://localhost:8000
 
-## Code of Conduct
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=sgb_backlog_db # Crie este banco de dados no seu MySQL
+        DB_USERNAME=root # Seu usuário do MySQL
+        DB_PASSWORD= # Sua senha do MySQL
+        ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5.  **Gerar Chave da Aplicação:**
+    ```bash
+    php artisan key:generate
+    ```
 
-## Security Vulnerabilities
+6.  **Executar Migrations (Criar Tabelas no Banco de Dados):**
+    Certifique-se de que seu servidor MySQL está rodando e que o banco de dados (`sgb_backlog_db` ou o nome que você definiu) foi criado.
+    ```bash
+    php artisan migrate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7.  **Executar Seeders (Popular Dados Iniciais, como usuário admin):**
+    ```bash
+    php artisan db:seed # Isso executará o UserSeeder e outros que você adicionar ao DatabaseSeeder.php
+    ```
 
-## License
+8.  **Compilar Assets Frontend (se aplicável com Vite/Mix):**
+    ```bash
+    npm run dev # Para desenvolvimento
+    # ou npm run build # Para produção
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Executando a Aplicação
+Para iniciar o servidor de desenvolvimento local do Laravel:
+```bash
+php artisan serve
