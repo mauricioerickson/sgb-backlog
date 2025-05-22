@@ -1,61 +1,81 @@
 @extends('layouts.app')
 
-@section('title', 'Editar Funcionalidade - SGB')
+@section('title', __('sgb.edit_feature') . ': ' . $feature->title . ' - ' . __('sgb.sgb'))
 
 @section('content')
-    <h2>Editar Funcionalidade: {{ $feature->title }}</h2>
+    <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-6">
+            {{ __('sgb.edit_feature') }}: <span class="text-blue-600 dark:text-blue-400">{{ $feature->title }}</span>
+        </h2>
 
-    <form action="{{ route('features.update', $feature) }}" method="POST">
-        @csrf
-        @method('PUT')
+        <form action="{{ route('features.update', $feature) }}" method="POST">
+            @csrf
+            @method('PUT') {{-- Importante para o método update --}}
 
-        <div class="form-group">
-            <label for="title">Título da Funcionalidade:</label>
-            <input type="text" id="title" name="title" value="{{ old('title', $feature->title) }}" required>
-            @error('title')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+            {{-- Título da Funcionalidade --}}
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('sgb.feature_title_label') }}</label>
+                <input type="text" id="title" name="title" value="{{ old('title', $feature->title) }}" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-gray-200">
+                @error('title')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="form-group">
-            <label for="description">Descrição:</label>
-            <textarea id="description" name="description" rows="4">{{ old('description', $feature->description) }}</textarea>
-            @error('description')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+            {{-- Descrição --}}
+            <div class="mb-4">
+                <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('sgb.description_label') }}</label>
+                <textarea id="description" name="description" rows="4"
+                          class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-gray-200">{{ old('description', $feature->description) }}</textarea>
+                @error('description')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="form-group">
-            <label for="objective_id">Objetivo Principal Associado:</label>
-            <select id="objective_id" name="objective_id" required>
-                <option value="">Selecione um Objetivo Principal</option>
-                @foreach ($mainObjectives as $objective)
-                    <option value="{{ $objective->id }}"
-                        {{ old('objective_id', $feature->objective_id) == $objective->id ? 'selected' : '' }}>
-                        {{ $objective->title }}
-                    </option>
-                @endforeach
-            </select>
-            @error('objective_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+            {{-- Objetivo Principal Associado --}}
+            <div class="mb-4">
+                <label for="objective_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('sgb.main_objective_associated_label') }}</label>
+                <select id="objective_id" name="objective_id" required
+                        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option value="">{{ __('sgb.select_main_objective') }}</option>
+                    @foreach ($mainObjectives as $objective) {{-- Assegure que $mainObjectives é passado pelo controller --}}
+                        <option value="{{ $objective->id }}"
+                            {{ old('objective_id', $feature->objective_id) == $objective->id ? 'selected' : '' }}>
+                            {{ $objective->title }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('objective_id')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="form-group">
-            <label for="status">Status:</label>
-            <select id="status" name="status" required>
-                @foreach ($statuses as $statusValue)
-                    <option value="{{ $statusValue }}" {{ old('status', $feature->status) == $statusValue ? 'selected' : '' }}>
-                        {{ $statusValue }}
-                    </option>
-                @endforeach
-            </select>
-            @error('status')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+            {{-- Status --}}
+            <div class="mb-6"> {{-- Aumentei a margem inferior antes dos botões --}}
+                <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('sgb.status_label') }}</label>
+                <select id="status" name="status" required
+                        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    @foreach ($statuses as $statusValue) {{-- Assegure que $statuses é passado pelo controller --}}
+                        <option value="{{ $statusValue }}" {{ old('status', $feature->status) == $statusValue ? 'selected' : '' }}>
+                            {{ $statusValue }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('status')
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <button type="submit" class="btn btn-primary">Atualizar Funcionalidade</button>
-        <a href="{{ route('features.show', $feature) }}" class="btn btn-secondary">Cancelar</a>
-    </form>
+            {{-- Botões de Ação --}}
+            <div class="flex items-center justify-end space-x-4">
+                <a href="{{ route('features.show', $feature) }}" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    {{ __('sgb.cancel') }}
+                </a>
+                <button type="submit"
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                    {{ __('sgb.update') }} {{-- Usando a chave 'sgb.update' --}}
+                </button>
+            </div>
+        </form>
+    </div>
 @endsection
