@@ -40,6 +40,12 @@ return [
     'created_at'                            => 'Criado em',
     'updated_at'                            => 'Atualizado em',
 
+    // Termos Genéricos para Filtros e Seleções
+    'all_statuses'                          => 'Todos os Status',
+    'all_priorities'                        => 'Todas as Prioridades',
+    'all_assignees'                         => 'Todos os Responsáveis',
+    'all_features'                          => 'Todas as Funcionalidades',
+
     //--------------------------------------------------------------------------
     // Mensagens de Feedback (Flash Messages)
     //--------------------------------------------------------------------------
@@ -217,5 +223,29 @@ return [
     'password'                              => 'Senha',
     'remember_me'                           => 'Lembrar-me',
     'forgot_password'                       => 'Esqueceu sua senha?',
+
+    'table_header_id'                       => 'ID',
+    'table_header_title'                    => 'Título', // Já temos sgb.task_title_label
+    'table_header_feature'                  => 'Funcionalidade', // Já temos sgb.feature
+    'table_header_status'                   => 'Status', // Já temos sgb.status_label
+    'table_header_priority'                 => 'Prioridade', // Já temos sgb.priority_label
+    'table_header_assignee'                 => 'Responsável', // Já temos sgb.assignee_label_optional
+    'table_header_due_date'                 => 'Vencimento', // Já temos sgb.due_date_label_optional
+
+    'none_female'                           => 'Nenhuma', // Ex: Funcionalidade: Nenhuma, Sprint: Nenhuma
+    'none_male'                             => 'Nenhum',  // Ex: Sistema: Nenhum, Módulo: Nenhum, Solicitante: Nenhum
+    'nobody'                                => 'Ninguém', // Ex: Responsável: Ninguém
+
+
+    //--------------------------------------------------------------------------
+    // Chaves para Formulários (especialmente para tasks/_form.blade.php)
+    //--------------------------------------------------------------------------
+    'main_details'                          => 'Detalhes Principais',
+    'associations_and_context'              => 'Associações e Contexto',
+    'classification_and_effort'             => 'Classificação e Esforço',
+    'deadlines_and_sprints'                 => 'Prazos e Sprints',
+    'people_and_status'                     => 'Pessoas e Status',
+    'additional_information'                => 'Informações Adicionais',
+
 
 ];
