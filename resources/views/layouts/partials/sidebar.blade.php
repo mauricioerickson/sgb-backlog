@@ -3,20 +3,12 @@
     {{-- Logo ou Nome do Projeto --}}
     <div class="text-center mb-4">
         <a href="{{ route('dashboard') }}" class="text-2xl font-semibold text-white hover:text-gray-300">
-            SGB
+            {{ config('app.name', 'Laravel') }}
         </a>
     </div>
 
     <nav class="flex-grow">
-        <ul class="space-y-1">
-            <li>
-                <a href="{{ route('dashboard') }}"
-                   class="flex items-center px-4 py-2.5 rounded-md transition duration-200 ease-in-out
-                          {{ request()->routeIs('dashboard') ? 'bg-blue-600 text-white' : 'hover:bg-gray-700 hover:text-white' }}">
-                    {{-- Adicione um ícone SVG aqui se desejar --}}
-                    <span class="ml-3">Dashboard</span>
-                </a>
-            </li>
+        <ul class="space-y-1">           
             <li>
                 <a href="{{ route('quarters.index') }}"
                    class="flex items-center px-4 py-2.5 rounded-md transition duration-200 ease-in-out

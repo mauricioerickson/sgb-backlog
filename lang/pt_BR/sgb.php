@@ -4,8 +4,8 @@ return [
     //--------------------------------------------------------------------------
     // Termos Gerais e Ações Comuns
     //--------------------------------------------------------------------------
-    'sgb'                                   => 'SGB', // Nome curto ou sigla do projeto
-    'app_name'                              => 'Sistema Gerenciador de Backlog',
+    'sgb'                                   => 'SGBR', // Nome curto ou sigla do projeto
+    'app_name'                              => 'Sistema Gerenciador de Backlog/Roadmap',
     'dashboard'                             => 'Painel Principal',
     'actions'                               => 'Ações',
     'id'                                    => 'ID',
@@ -60,7 +60,7 @@ return [
     //--------------------------------------------------------------------------
     // Dashboard
     //--------------------------------------------------------------------------
-    'welcome_dashboard'                     => 'Bem-vindo(a) ao Sistema Gerenciador de Backlog!',
+    'welcome_dashboard'                     => 'Bem-vindo(a) ao Sistema Gerenciador de Backlog!/Roadmap!',
     'total_objectives'                      => 'Total de Objetivos',
     'objectives_in_progress'                => 'Objetivos em Andamento',
     'total_features'                        => 'Total de Funcionalidades',
